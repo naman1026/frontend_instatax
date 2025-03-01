@@ -1,0 +1,206 @@
+/* src/components/Hero.css */
+.hero {
+  background-color: #6c46d6;
+  color: white;
+  padding: 40px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  padding: 0 20px;
+  position: relative;
+}
+
+.hero-content {
+  grid-column: span 1;
+  padding-right: 20px;
+}
+
+.hero-content h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-size: 16px;
+  margin-bottom: 12px;
+  opacity: 0.9;
+}
+
+.hero-points {
+  margin-top: 20px;
+}
+
+.hero-image {
+  grid-column: span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 400px;
+}
+
+.quote-form {
+  grid-column: span 1;
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.quote-form h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.quote-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.quote-form input {
+  padding: 12px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.quote-form input:focus {
+  border-color: #6c46d6;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.prefix-input {
+  width: 30%;
+}
+
+.fullname-input {
+  width: 70%;
+}
+
+.form-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+/* Toggle switch */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #6c46d6;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+.slider.round {
+  border-radius: 20px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.quote-btn {
+  background-color: #6c46d6;
+  color: white;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.quote-btn:hover {
+  background-color: #5b3cb9;
+}
+
+@media (max-width: 992px) {
+  .hero-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-content {
+    grid-column: span 2;
+  }
+
+  .hero-image {
+    grid-column: span 1;
+  }
+
+  .quote-form {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content,
+  .hero-image,
+  .quote-form {
+    grid-column: span 1;
+  }
+}

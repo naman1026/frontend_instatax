@@ -1,0 +1,26 @@
+// src/components/AboutUs.jsx
+import React from "react";
+import "./AboutUs.css";
+import aboutIllustration from "../assets/about-illustration.svg";
+
+const AboutUs = () => {
+  return (
+    <section className="about-us" id="about-us">
+      <div className="about-container">
+        <div className="about-illustration">
+          <img src={aboutIllustration} alt="Team illustration" />
+        </div>
+
+        <div className="about-content">
+          <h2>
+            InstaTax.ai supports busy Entrepreneurs to handle their messy
+            Startup Legalities and Tax filings so that they worry less and focus
+            more on their dream business.
+          </h2>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default AboutUs;
