@@ -22,22 +22,4 @@ const BlogsSection = ({ blogPosts }) => {
   );
 };
 
-// Example of how to use this component:
-/*
-const blogPostsData = [
-  {
-    title: "How to Manage Startup Taxes",
-    content: "Enter the content here. Enter the content here. Enter the content here. Enter the content here. Enter the content here. Enter the content here. Enter the content here. Enter the content here. Enter the content here.",
-    image: "/images/blog1.jpg"
-  },
-  {
-    title: "Legal Requirements for New Businesses",
-    content: "Enter the content here. Enter the content here. Enter the content here. Enter the content here. Enter the content here. Enter the content here. Enter the content here. Enter the content here. Enter the content here.",
-    image: "/images/blog2.jpg"
-  }
-];
-
-<BlogsSection blogPosts={blogPostsData} />
-*/
-
 export default BlogsSection;
