@@ -1,0 +1,293 @@
+/* src/pages/services/ServicePage.css */
+.service-page {
+  background: url('../../assets/Servicespage1.png') no-repeat center center;
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Full-screen height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.service-container {
+  display: flex;
+  justify-content: space-between; /* Ensures spacing */
+  align-items: center;
+  width: 90%;
+  max-width: 1300px;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+.service-illustration {
+  width: 35%; /* Adjusted width */
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.service-illustration img {
+  width: 100%; /* Fit within container */
+  height: auto;
+  object-fit: contain;
+}
+
+ .service-info {
+  width: 30%;
+  text-align: left;
+  padding: 0 20px;
+  margin-top: -10px;
+  color:black; /* Ensures readability over the background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.service-info h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.service-info p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.quote-form-container {
+  width: 15%; /* Reduce width */
+
+  background: rgba(255, 255, 255, 0.95); /* More opacity */
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.quote-form {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.quote-form h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.form-row {
+  display: flex;
+  /* gap: 10px; */
+  margin-bottom: 0px;
+}
+
+.prefix-group {
+  flex: 1;
+}
+
+.fullname-group {
+  flex: 2;
+}
+
+.form-group {
+  margin-bottom: 0px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 16px; /* More padding for better usability */
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 8px; /* Softer rounded edges */
+  font-size: 16px;
+}
+.form-group input:focus {
+  outline: none;
+  border-color: #7e57ff;
+  background-color: #fff;
+}
+
+.toggle-group {
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 25px; */
+}
+
+.toggle-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background-color: #e8e8e8;
+  border-radius: 12px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-switch.active {
+  background-color: #7e57ff;
+}
+
+.toggle-button {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle-switch.active .toggle-button {
+  transform: translateX(20px);
+}
+
+.toggle-group label {
+  font-size: 14px;
+  color: #555;
+}
+
+.quote-button {
+  width: 100%;
+  padding: 14px;
+  background-color: #7e57ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.quote-button:hover {
+  background-color: #6a46e5;
+}
+
+/* Responsive styles for tablets */
+@media (max-width: 992px) {
+  .service-container {
+    flex-direction: column; /* Stack elements */
+    align-items: center;
+    top: 50%;
+  }
+
+  .service-illustration,
+  .service-info,
+  .quote-form-container {
+    width: 80%; /* Take more width on tablets */
+    text-align: center;
+  }
+
+  .service-info h1 {
+    font-size: 26px;
+  }
+
+  .service-info p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .quote-form-container {
+    width: 60%; /* Make form slightly bigger */
+    padding: 15px;
+  }
+
+  .quote-form {
+    padding: 15px;
+  }
+
+  .form-group input {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+/* Responsive styles for mobile screens */
+@media (max-width: 768px) {
+  .service-container {
+    top: 50%; /* Adjust vertical position */
+    width: 90%;
+  }
+
+  .service-info {
+    width: 90%;
+    text-align: center;
+    margin-top: -80px; /* Adjusted text positioning */
+  }
+
+  .service-info h1 {
+    font-size: 24px;
+  }
+
+  .service-info p {
+    font-size: 15px;
+  }
+
+  .service-illustration {
+    width: 100%;
+    height: auto;
+  }
+
+  .quote-form-container {
+    width: 80%; /* More width for smaller screens */
+    padding: 10px;
+  }
+
+  .form-group input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .quote-button {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+/* Responsive styles for very small screens (phones) */
+@media (max-width: 576px) {
+  .service-container {
+    top: 55%; /* Adjust positioning */
+  }
+
+  .service-info {
+    width: 100%;
+    text-align: center;
+    margin-top: -50px;
+  }
+
+  .service-info h1 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .service-info p {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .quote-form-container {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .form-group input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .quote-button {
+    padding: 10px;
+    font-size: 14px;
+  }
+}

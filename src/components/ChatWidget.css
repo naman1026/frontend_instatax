@@ -1,8 +1,7 @@
-/* src/components/ChatWidget.css */
 .chat-widget {
   position: fixed;
   bottom: 30px;
-  right: 30px;
+  right: 25px;
   z-index: 99;
 }
 

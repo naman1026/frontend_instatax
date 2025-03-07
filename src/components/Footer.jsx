@@ -1,7 +1,15 @@
 // src/components/Footer.jsx
 import React from "react";
 import "./Footer.css";
-import logoWhite from "../assets/logo-white.svg";
+import logoWhite from "../assets/logo-01.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faTwitter,
+  faInstagram,
+  faYoutube,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   return (
@@ -17,7 +25,7 @@ const Footer = () => {
               your startup.
             </p>
 
-            <div className="social-icons">
+            {/* <div className="social-icons">
               <a href="#" aria-label="Facebook">
                 <i className="social-icon facebook">f</i>
               </a>
@@ -40,11 +48,50 @@ const Footer = () => {
               <a href="#" aria-label="LinkedIn">
                 <i className="social-icon linkedin"></i>
               </a>
+            </div> */}
+            <div className="social-icons">
+              <a href="#" aria-label="Facebook">
+                <FontAwesomeIcon icon={faFacebook} className="social-icon" />
+              </a>
+              <a href="#" aria-label="Twitter">
+                <FontAwesomeIcon icon={faTwitter} className="social-icon" />
+              </a>
+              <a href="#" aria-label="Instagram">
+                <FontAwesomeIcon icon={faInstagram} className="social-icon" />
+              </a>
+              <a href="#" aria-label="YouTube">
+                <FontAwesomeIcon icon={faYoutube} className="social-icon" />
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                <FontAwesomeIcon icon={faLinkedin} className="social-icon" />
+              </a>
             </div>
           </div>
 
           <div className="footer-content">
             <h3>Content</h3>
+            {/* <ul ul className="footer-links">
+            <li>
+              <a href="#" className="footer-link">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="#" className="footer-link">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="#" className="footer-link">
+                Blogs
+              </a>
+            </li>
+            <li>
+              <a href="#" className="footer-link">
+                Services
+              </a>
+            </li>
+            </ul> */}
             <ul className="footer-links">
               <li>
                 <a href="#" className="footer-link">
@@ -75,11 +122,13 @@ const Footer = () => {
         <div className="footer-container">
           <div className="footer-logo">
             <img src={logoWhite} alt="InstaTax.ai" />
-            <span>InstaTax.ai</span>
+            {/* <span>InstaTax.ai</span> */}
           </div>
 
           <div className="footer-copyright">
-            <p>© 2025 InstaTax.ai. All Rights Reserved.</p>
+            <p>
+              © {new Date().getFullYear()} InstaTax.ai. All Rights Reserved.
+            </p>
             <a href="#" className="privacy-link">
               Privacy
             </a>

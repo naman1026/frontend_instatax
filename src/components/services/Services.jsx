@@ -1,24 +1,25 @@
 // src/components/Services.jsx
 import React from "react";
 import "./Services.css";
-import serviceImage from "../assets/service-illustration.svg";
+import serviceImage from "../../assets/Services1.png";
 
 const Services = () => {
   return (
+   
     <section className="services">
       <div className="services-container">
-        <div className="services-header">
-          <h2>Our Services</h2>
-        </div>
-
         <div className="services-content">
+          {/* Left Section: Title, Paragraph, Services */}
           <div className="services-text">
-            <p>
-              Starting a business is exciting, but navigating legal complexities
-              can be overwhelming. We simplify the process with expert guidance
-              and seamless execution, so you can focus on what matters—growing
-              your startup.
-            </p>
+            <div className="services-header">
+              <h2>Our Services</h2>
+              <p>
+                Starting a business is exciting, but navigating legal
+                complexities can be overwhelming. We simplify the process with
+                expert guidance and seamless execution, so you can focus on what
+                matters—growing your startup.
+              </p>
+            </div>
 
             <div className="service-categories">
               <div className="service-category">
@@ -58,12 +59,14 @@ const Services = () => {
             </div>
           </div>
 
+          {/* Right Section: Image */}
           <div className="services-image">
             <img src={serviceImage} alt="Services illustration" />
           </div>
         </div>
       </div>
 
+      {/* Chat Widget */}
       <div className="chat-widget">
         <button className="chat-btn">
           <span>Chat with Us!</span>

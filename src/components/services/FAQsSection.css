@@ -1,0 +1,82 @@
+/* FAQs Section Styles */
+.faqs-container {
+  background-color: #f4f5f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.faqs-content {
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+}
+
+.faqs-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  text-decoration: underline;
+}
+
+.faqs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.faq-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 15px 20px;
+}
+
+.faq-text {
+  color: #555;
+  font-size: 16px;
+}
+
+.faq-icon {
+  color: white;
+  background-color: #007bff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .faqs-content {
+    padding: 20px;
+    margin: 0 10px;
+  }
+
+  .faqs-title {
+    font-size: 20px;
+  }
+
+  .faq-text {
+    font-size: 14px;
+  }
+
+  .faq-item {
+    padding: 10px 15px;
+  }
+
+  .faq-icon {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+}

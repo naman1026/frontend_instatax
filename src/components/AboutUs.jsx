@@ -1,7 +1,7 @@
 // src/components/AboutUs.jsx
 import React from "react";
 import "./AboutUs.css";
-import aboutIllustration from "../assets/about-illustration.svg";
+import aboutIllustration from "../assets/aboutus11.png";
 
 const AboutUs = () => {
   return (

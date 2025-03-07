@@ -1,7 +1,7 @@
 // src/components/AboutCompany.jsx
 import React from "react";
 import "./AboutCompany.css";
-import companyIllustration from "../assets/company-illustration.svg";
+import companyIllustration from "../assets/aboutus1.png";
 import ChatWidget from "./ChatWidget";
 
 const AboutCompany = () => {
@@ -23,7 +23,10 @@ const AboutCompany = () => {
               Starting a business is exciting, but navigating legal complexities
               can be overwhelming. We simplify the process with expert guidance
               and seamless execution, so you can focus on what matters—growing
-              your startup.
+              your startup. Starting a business is exciting, but navigating
+              legal complexities can be overwhelming. <br></br>We simplify the process
+              with expert guidance and seamless execution, so you can focus on
+              what matters—growing your startup.
             </p>
 
             <p>
@@ -33,19 +36,14 @@ const AboutCompany = () => {
               your startup.
             </p>
 
-            <p>
-              Starting a business is exciting, but navigating legal complexities
-              can be overwhelming. We simplify the process with expert guidance
-              and seamless execution, so you can focus on what matters—growing
-              your startup.
-            </p>
+         
 
-            <p>
+            {/* <p>
               Starting a business is exciting, but navigating legal complexities
               can be overwhelming. We simplify the process with expert guidance
               and seamless execution, so you can focus on what matters—growing
               your startup.
-            </p>
+            </p> */}
           </div>
         </div>
 

@@ -1,15 +1,18 @@
 // src/components/AppPromotion.jsx
 import React from "react";
 import "./AppPromotion.css";
-import googlePlayBadge from "../assets/google-play-badge.svg";
-import appStoreBadge from "../assets/app-store-badge.svg";
+import googlePlayBadge from "../assets/google-play-badge.png";
+import appStoreBadge from "../assets/app-store-badge.png";
+import appIllustration from "../assets/mobile1.png"; // Update this to your image filename
 
 const AppPromotion = () => {
   return (
     <section className="app-promotion">
       <div className="app-promotion-container">
         <div className="app-promotion-content">
-          <h2>Law made simple, startups made easy!</h2>
+          <h2> Law made simple,
+            <br />
+            startups made easy!</h2>
 
           <div className="app-ranking">
             <p>
@@ -29,8 +32,8 @@ const AppPromotion = () => {
           </div>
         </div>
 
-        <div className="app-promotion-graphic">
-          {/* This will be created with CSS for the background gradient and icons */}
+        <div className="app-illustration">
+          <img src={appIllustration} alt="App features illustration" />
         </div>
       </div>
     </section>

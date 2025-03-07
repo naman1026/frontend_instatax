@@ -1,8 +1,8 @@
 /* src/components/Hero.css */
 .hero {
-  background-color: #6c46d6;
+  background-color: #673EE4;
   color: white;
-  padding: 40px 0;
+  padding: 35px 0;
   position: relative;
   overflow: hidden;
 }
@@ -17,12 +17,37 @@
   position: relative;
 }
 
-.hero-content {
+/* .hero-content {
   grid-column: span 1;
-  padding-right: 20px;
+  padding-right: 2px;
+} */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: white;
+  margin-left: 20px;
 }
-
-.hero-content h1 {
+.hero-title {
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.2; /* Keep lines close */
+}
+.hero-subtext {
+  font-size: 1rem;
+  margin-top: 18px; /* Small space below title */
+}
+.hero-points {
+  margin-top: 18px; /* Space below subtext */
+  margin-left: 15px; /* Slightly more left than the title */
+  line-height: 2;
+}
+.hero-points p {
+  margin: 3px 0;
+}
+/* .hero-content h1 {
+  font-style: Outfit;
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 20px;
@@ -33,11 +58,11 @@
   font-size: 16px;
   margin-bottom: 12px;
   opacity: 0.9;
-}
-
+} */
+/* 
 .hero-points {
   margin-top: 20px;
-}
+} */
 
 .hero-image {
   grid-column: span 1;
@@ -55,7 +80,7 @@
   grid-column: span 1;
   background-color: white;
   border-radius: 12px;
-  padding: 24px;
+  padding: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   color: #333;
 }
@@ -63,7 +88,7 @@
 .quote-form h2 {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom:5px;
   text-align: center;
   color: #333;
 }
@@ -71,14 +96,14 @@
 .quote-form form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 8px;
 }
 
 .quote-form input {
   padding: 12px 15px;
   border: 1px solid #e0e0e0;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 12px;
   outline: none;
   transition: border-color 0.3s;
 }

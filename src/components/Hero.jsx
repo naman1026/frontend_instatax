@@ -1,15 +1,30 @@
 // src/components/Hero.jsx
 import React from "react";
 import "./Hero.css";
-import heroImage from "../assets/hero-illustration.svg";
+import heroImage from "../assets/heroimage11.png";
 
 const Hero = () => {
   return (
     <section className="hero">
       <div className="hero-container">
-        <div className="hero-content">
-          <h1>Your Trusted Partner for Startup Legalities.</h1>
+        {/* <div className="hero-content">
+          <h1>Your Trusted Partner <br />for Startup Legalities.</h1>
           <p>Write your subtext here.</p>
+
+          <div className="hero-points">
+            <p>Write your subpoints here.</p>
+            <p>Write your subpoints here.</p>
+            <p>Write your subpoints here.</p>
+            <p>Write your subpoints here.</p>
+            <p>Write your subpoints here.</p>
+          </div>
+        </div> */}
+        <div className="hero-content">
+          <h1 className="hero-title">
+            Your Trusted Partner <br />
+            for Startup Legalities.
+          </h1>
+          <p className="hero-subtext">Write your subtext here.</p>
 
           <div className="hero-points">
             <p>Write your subpoints here.</p>
