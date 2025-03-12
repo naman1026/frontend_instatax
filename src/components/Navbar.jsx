@@ -1,5 +1,5 @@
 // src/components/Navbar.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../assets/logo-02.jpg";
@@ -11,14 +11,38 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
   const [buttonClicked, setButtonClicked] = useState(false);
-  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+
+  // Separate states for desktop and mobile dropdowns
+  const [desktopServicesDropdownOpen, setDesktopServicesDropdownOpen] =
+    useState(false);
+  const [mobileServicesDropdownOpen, setMobileServicesDropdownOpen] =
+    useState(false);
+
+  // Refs for click-away functionality
+  const desktopDropdownRef = useRef(null);
+  const mobileDropdownRef = useRef(null);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+    // Reset mobile dropdown when menu is closed
+    if (menuOpen) {
+      setMobileServicesDropdownOpen(false);
+    }
   };
 
-  const toggleServicesDropdown = () => {
-    setServicesDropdownOpen(!servicesDropdownOpen);
+  const toggleDesktopServicesDropdown = () => {
+    setDesktopServicesDropdownOpen(!desktopServicesDropdownOpen);
+  };
+
+  const toggleMobileServicesDropdown = () => {
+    setMobileServicesDropdownOpen(!mobileServicesDropdownOpen);
+  };
+
+  const navigateToServices = () => {
+    navigate("/services");
+    setDesktopServicesDropdownOpen(false);
+    setMobileServicesDropdownOpen(false);
+    setMenuOpen(false);
   };
 
   const openPopup = () => {
@@ -34,6 +58,37 @@ const Navbar = () => {
     navigate("/"); // Redirect to home page after verification
   };
 
+  // Click-away functionality
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Handle desktop dropdown click-away
+      if (
+        desktopDropdownRef.current &&
+        !desktopDropdownRef.current.contains(event.target) &&
+        desktopServicesDropdownOpen
+      ) {
+        setDesktopServicesDropdownOpen(false);
+      }
+
+      // Handle mobile dropdown click-away
+      if (
+        mobileDropdownRef.current &&
+        !mobileDropdownRef.current.contains(event.target) &&
+        mobileServicesDropdownOpen
+      ) {
+        setMobileServicesDropdownOpen(false);
+      }
+    };
+
+    // Add event listener
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [desktopServicesDropdownOpen, mobileServicesDropdownOpen]);
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -47,31 +102,24 @@ const Navbar = () => {
           <Link to="/" className={location.pathname === "/" ? "active" : ""}>
             Home
           </Link>
-          <Link
-            to="/about-us"
-            className={location.pathname === "/about-us" ? "active" : ""}
-          >
-            About Us
-          </Link>
-          <Link
-            to="/blogs"
-            className={location.pathname === "/blogs" ? "active" : ""}
-          >
-            Blogs
-          </Link>
-          <div className="dropdown">
+          <div className="dropdown" ref={desktopDropdownRef}>
             <Link
-              to="/services"
-              className={location.pathname === "/services" ? "active" : ""}
+              to="#"
+              className={
+                location.pathname.includes("/services") ? "active" : ""
+              }
               onClick={(e) => {
                 e.preventDefault();
-                toggleServicesDropdown();
+                toggleDesktopServicesDropdown();
               }}
             >
               Services <span className="dropdown-arrow">▼</span>
             </Link>
-            {servicesDropdownOpen && (
+            {desktopServicesDropdownOpen && (
               <div className="dropdown-content">
+                <Link to="/services" onClick={navigateToServices}>
+                  All Services
+                </Link>
                 <Link to="/services/business-registration">
                   Business Registration
                 </Link>
@@ -88,6 +136,19 @@ const Navbar = () => {
               </div>
             )}
           </div>
+          <Link
+            to="/blogs"
+            className={location.pathname === "/blogs" ? "active" : ""}
+          >
+            Blog
+          </Link>
+
+          <Link
+            to="/about-us"
+            className={location.pathname === "/about-us" ? "active" : ""}
+          >
+            About Us
+          </Link>
           <Link
             to="/payment"
             className={location.pathname === "/payment" ? "active" : ""}
@@ -123,13 +184,98 @@ const Navbar = () => {
         >
           Home
         </Link>
-        <Link
-          to="/about-us"
-          className={location.pathname === "/about-us" ? "active" : ""}
-          onClick={() => setMenuOpen(false)}
+        {/* Services in mobile menu */}
+        <div
+          className={`mobile-dropdown-title ${
+            mobileServicesDropdownOpen ? "active" : ""
+          }`}
+          onClick={toggleMobileServicesDropdown}
         >
-          About Us
-        </Link>
+          <div
+            className="mobile-dropdown-title"
+            onClick={toggleMobileServicesDropdown}
+          >
+            Services <span className="dropdown-arrow">▼</span>
+          </div>
+
+          {mobileServicesDropdownOpen && (
+            <div className="mobile-dropdown-content">
+              <Link
+                to="/services"
+                onClick={() => {
+                  setMenuOpen(false);
+                  setMobileServicesDropdownOpen(false);
+                }}
+              >
+                All Services
+              </Link>
+              <Link
+                to="/services/business-registration"
+                onClick={() => {
+                  setMenuOpen(false);
+                  setMobileServicesDropdownOpen(false);
+                }}
+              >
+                Business Registration
+              </Link>
+              <Link
+                to="/services/tax-filing"
+                onClick={() => {
+                  setMenuOpen(false);
+                  setMobileServicesDropdownOpen(false);
+                }}
+              >
+                Tax Filing & Advisory
+              </Link>
+              <Link
+                to="/services/accounting"
+                onClick={() => {
+                  setMenuOpen(false);
+                  setMobileServicesDropdownOpen(false);
+                }}
+              >
+                Accounting Services
+              </Link>
+              <Link
+                to="/services/compliance"
+                onClick={() => {
+                  setMenuOpen(false);
+                  setMobileServicesDropdownOpen(false);
+                }}
+              >
+                Compliance & Legal Support
+              </Link>
+              <Link
+                to="/services/trademark"
+                onClick={() => {
+                  setMenuOpen(false);
+                  setMobileServicesDropdownOpen(false);
+                }}
+              >
+                Trademark & Copyright
+              </Link>
+              <Link
+                to="/services/certification"
+                onClick={() => {
+                  setMenuOpen(false);
+                  setMobileServicesDropdownOpen(false);
+                }}
+              >
+                Certification & Licenses
+              </Link>
+              <Link
+                to="/services/other"
+                onClick={() => {
+                  setMenuOpen(false);
+                  setMobileServicesDropdownOpen(false);
+                }}
+              >
+                Other Services
+              </Link>
+            </div>
+          )}
+        </div>
+
         <Link
           to="/blogs"
           className={location.pathname === "/blogs" ? "active" : ""}
@@ -138,57 +284,13 @@ const Navbar = () => {
           Blogs
         </Link>
 
-        {/* Services in mobile menu */}
-        <div className="mobile-dropdown">
-          <div
-            className="mobile-dropdown-title"
-            onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
-          >
-            Services <span className="dropdown-arrow">▼</span>
-          </div>
-
-          {servicesDropdownOpen && (
-            <div className="mobile-dropdown-content">
-              <Link
-                to="/services/business-registration"
-                onClick={() => setMenuOpen(false)}
-              >
-                Business Registration
-              </Link>
-              <Link
-                to="/services/tax-filing"
-                onClick={() => setMenuOpen(false)}
-              >
-                Tax Filing & Advisory
-              </Link>
-              <Link
-                to="/services/accounting"
-                onClick={() => setMenuOpen(false)}
-              >
-                Accounting Services
-              </Link>
-              <Link
-                to="/services/compliance"
-                onClick={() => setMenuOpen(false)}
-              >
-                Compliance & Legal Support
-              </Link>
-              <Link to="/services/trademark" onClick={() => setMenuOpen(false)}>
-                Trademark & Copyright
-              </Link>
-              <Link
-                to="/services/certification"
-                onClick={() => setMenuOpen(false)}
-              >
-                Certification & Licenses
-              </Link>
-              <Link to="/services/other" onClick={() => setMenuOpen(false)}>
-                Other Services
-              </Link>
-            </div>
-          )}
-        </div>
-
+        <Link
+          to="/about-us"
+          className={location.pathname === "/about-us" ? "active" : ""}
+          onClick={() => setMenuOpen(false)}
+        >
+          About Us
+        </Link>
         <Link
           to="/payment"
           className={location.pathname === "/payment" ? "active" : ""}
