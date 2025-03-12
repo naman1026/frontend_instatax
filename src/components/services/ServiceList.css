@@ -6,11 +6,12 @@
 }
 
 .services-container {
-  max-width: 1200px;
+  max-width: 1100px;
+  /* height: 500px; */
   margin: 0 auto;
   display: flex;
   align-items: flex-start;
-  gap: 40px;
+  gap: 50px;
 }
 
 .services-list {
@@ -28,8 +29,8 @@
 .service-card {
   background-color: #f2f2f2;
   border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 15px;
+  padding: 10px;
+  margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,7 +48,7 @@
 }
 
 .service-card h2 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   margin-bottom: 5px;
   color: #333;

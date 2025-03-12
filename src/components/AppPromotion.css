@@ -74,9 +74,9 @@
 }
 
 .app-illustration img {
-  max-width: none;
-  width: auto;
-  height: 100%;
+  max-width: fit-content;
+  /* width: auto; */
+  height: 600px;
   display: block;
     object-fit: contain;
    object-position: right center;
@@ -97,8 +97,8 @@
   }
   
   .app-illustration img {
-    height: 100%;
-    max-width: none;
+    height: 500px;
+    max-width: fit-content;
     width: auto;
   }
 }

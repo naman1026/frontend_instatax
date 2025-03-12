@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import AppPromotion from "../components/AppPromotion";
 import Footer from "../components/Footer";
 import Services from "../components/services/Services";
+import ChatWidget from "../components/ChatWidget";
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
       <Services />
       <AppPromotion />
       <Footer />
+      <ChatWidget />
     </div>
   );
 }

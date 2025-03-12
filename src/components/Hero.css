@@ -17,10 +17,7 @@
   position: relative;
 }
 
-/* .hero-content {
-  grid-column: span 1;
-  padding-right: 2px;
-} */
+
 .hero-content {
   display: flex;
   flex-direction: column;
@@ -46,23 +43,7 @@
 .hero-points p {
   margin: 3px 0;
 }
-/* .hero-content h1 {
-  font-style: Outfit;
-  font-size: 36px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-.hero-content p {
-  font-size: 16px;
-  margin-bottom: 12px;
-  opacity: 0.9;
-} */
-/* 
-.hero-points {
-  margin-top: 20px;
-} */
+ */
 
 .hero-image {
   grid-column: span 1;
@@ -78,8 +59,7 @@
 
 .quote-form {
   grid-column: span 1;
-  background-color: white;
-  border-radius: 12px;
+  background-color: EDEFF2 !important;
   padding: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   color: #333;
@@ -88,7 +68,8 @@
 .quote-form h2 {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom:5px;
+  margin-top: 20px;
+  margin-bottom:10px;
   text-align: center;
   color: #333;
 }
@@ -97,15 +78,17 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 20px 15px;
 }
 
 .quote-form input {
-  padding: 12px 15px;
+  padding: 18px 25px;
   border: 1px solid #e0e0e0;
-  border-radius: 6px;
+  border-radius: 5px;
   font-size: 12px;
   outline: none;
   transition: border-color 0.3s;
+  margin: 5px 0;
 }
 
 .quote-form input:focus {
@@ -123,6 +106,7 @@
 
 .fullname-input {
   width: 70%;
+
 }
 
 .form-toggle {
@@ -193,7 +177,8 @@ input:checked + .slider:before {
   font-weight: 500;
   font-size: 15px;
   transition: background-color 0.3s;
-  margin-top: 10px;
+  margin-top: 8px;
+  margin-bottom: 15px;
 }
 
 .quote-btn:hover {
