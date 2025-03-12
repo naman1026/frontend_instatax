@@ -6,7 +6,7 @@
 }
 
 .chat-btn {
-  background-color: #6c46d6;
+  background-color: 673EE4;
   color: white;
   padding: 12px 20px;
   border-radius: 30px;
@@ -20,13 +20,16 @@
   border: none;
   cursor: pointer;
 }
-
+.chat-icon {
+  width: 24px;  /* Adjust as needed */
+  height: 24px;
+}
 .chat-btn:hover {
-  background-color: #5b3cb9;
+  background-color: 673EE4;
   transform: translateY(-3px);
 }
 
 .chat-btn:before {
-  content: "💬";
+ 
   font-size: 18px;
 }
