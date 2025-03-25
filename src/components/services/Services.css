@@ -115,13 +115,15 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  max-width: 500px;
+  max-width: 600px;
 }
 
 .services-image img {
   max-width: 100%;
   object-fit: contain;
   height: auto;
+  max-width: 600px;
+  margin-bottom: 5px;
 }
 
 /* Chat Button */
@@ -158,6 +160,7 @@
   .services-content {
     flex-direction: column;
     align-items: center;
+    text-align: center;
   }
 
   .services-text {
@@ -172,11 +175,19 @@
     max-width: 100%;
 
   }
+  .services-image img {
+    max-width: 750px; /* Adjust for tablets */
+    margin-bottom: 2px;
+  }
 }
 
 @media (max-width: 768px) {
   .service-categories {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .services-image img {
+    max-width: 400px; /* Adjust for landscape phones */
+    margin-bottom: 2px;
   }
 }
 
@@ -194,4 +205,9 @@
     font-size: 14px;
     padding: 10px 16px;
   }
+  .services-image img {
+    max-width:340px; /* Adjust for small mobile */
+    margin-bottom: 5px;
+  }
+
 }
