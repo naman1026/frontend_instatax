@@ -2,6 +2,7 @@
 import React from "react";
 import "./Footer.css";
 import logoWhite from "../assets/logo-01.jpg";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
@@ -70,29 +71,29 @@ const Footer = () => {
               <h3>Content</h3>
               <ul className="footer-links">
                 <li>
-                  <a href="/" className="footer-link">
+                  <Link to="/" className="footer-link">
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/services" className="footer-link">
+                  <Link to="/services" className="footer-link">
                     Services
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/blogs" className="footer-link">
+                  <Link to="/blogs" className="footer-link">
                     Blogs
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/about-us" className="footer-link">
+                  <Link to="/about-us" className="footer-link">
                     About Us
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/payment" className="footer-link">
+                  <Link to="/payment" className="footer-link">
                     Payments
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -111,7 +112,7 @@ const Footer = () => {
             <p>
               © {new Date().getFullYear()} InstaTax.ai. All Rights Reserved.
               <br />
-              Privacy Refund
+              Privacy | Refund
             </p>
             {/* <a href="#" className="privacy-link">
               Privacy

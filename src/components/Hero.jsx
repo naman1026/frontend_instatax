@@ -28,7 +28,9 @@ const Hero = () => {
           <img src={heroImage} alt="Tax illustration" />
         </div>
 
-        <div className="quote-form" style={{ backgroundColor: "#EDEFF2",borderRadius:"35px"}}>
+        <div className="quote-form" 
+        style={{ backgroundColor: "#EDEFF2",borderRadius:"35px"}}
+        >
           <h2>Get Quote Instantly in a Minute!</h2>
 
           <form>

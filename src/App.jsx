@@ -1,6 +1,7 @@
 // src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -17,6 +18,7 @@ import ComplianceSupport from "./pages/Services";
 import TrademarkCopyright from "./pages/Services";
 import CertificationLicenses from "./pages/Services";
 import OtherServices from "./pages/Services";
+import ServiceQuoteHome from "../src/components/services/ServiceQuoteHome";
 
 import PrivateLimitedCompanyQuote from "./components/services/ServiceQuoteHome";
 import OnePersonCompanyQuote from "./components/services/ServiceQuoteHome";
@@ -27,6 +29,7 @@ import GSTRegistrationQuote from "./components/services/ServiceQuoteHome";
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="app">
         <Navbar />
         <Routes>
@@ -35,8 +38,8 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
 
           {/* Main services page */}
-          <Route path="/services" element={<Services />} />
-
+          {/* <Route path="/services" element={<Services />} /> */}
+          <Route path="/services/:categoryId" element={<Services />} />
           {/* Individual service routes */}
           <Route
             path="/services/business-registration"
@@ -96,6 +99,15 @@ function App() {
                 price="Rs. 1499"
               />
             }
+          />
+          <Route
+            path="/service-quote/:documentId"
+            element={<ServiceQuoteHome />}
+          />
+          {/* You might want to keep the old route as well for backward compatibility */}
+          <Route
+            path="/services/detail/:documentId"
+            element={<ServiceQuoteHome />}
           />
           <Route path="/services/tax-filing" element={<TaxFiling />} />
           <Route path="/services/accounting" element={<AccountingServices />} />
