@@ -8,14 +8,47 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [popupOpen, setPopupOpen] = useState(false);
-  const [buttonClicked, setButtonClicked] = useState(false);
 
   // Adding Dynamic categories from API
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Authentication states
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [popupOpen, setPopupOpen] = useState(false);
+
+  // Check for authentication on component mount
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userData = localStorage.getItem("user");
+
+    if (token && userData) {
+      setUser(JSON.parse(userData));
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  // Toggle mobile menu - UNCOMMENTED THIS FUNCTION
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+    // Reset mobile dropdown when menu is closed
+    if (menuOpen) {
+      setMobileServicesDropdownOpen(false);
+    }
+  };
+
+  // Custom logout function
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+    setIsAuthenticated(false);
+    navigate("/"); // Redirect to home
+  };
+
+  // Fetch categories from API - USING YOUR ORIGINAL API FETCHING CODE
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -25,7 +58,6 @@ const Navbar = () => {
           "/categories?populate=*", // Original endpoint
           // Try with /api prefix
           "/api/categories?populate=*",
-
           "/api/categories", // Simplified endpoint
           "/categories", // Basic endpoint
         ];
@@ -67,7 +99,7 @@ const Navbar = () => {
               {
                 id: 1,
                 documentId: "rfrdwj2y6i9nr6baq5kr3yln",
-                name: "Start Business",
+                name: " Business",
                 slug: "start_business",
                 order: 1,
                 isActive: true,
@@ -155,32 +187,12 @@ const Navbar = () => {
   const desktopDropdownRef = useRef(null);
   const mobileDropdownRef = useRef(null);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-    // Reset mobile dropdown when menu is closed
-    if (menuOpen) {
-      setMobileServicesDropdownOpen(false);
-    }
-  };
-
   const toggleDesktopServicesDropdown = () => {
     setDesktopServicesDropdownOpen(!desktopServicesDropdownOpen);
   };
 
   const toggleMobileServicesDropdown = () => {
     setMobileServicesDropdownOpen(!mobileServicesDropdownOpen);
-  };
-
-  const navigateToServices = () => {
-    navigate("/services");
-    setDesktopServicesDropdownOpen(false);
-    setMobileServicesDropdownOpen(false);
-    setMenuOpen(false);
-  };
-
-  const openPopup = () => {
-    setPopupOpen(true);
-    setButtonClicked(true);
   };
 
   const closePopup = () => {
@@ -228,9 +240,16 @@ const Navbar = () => {
         <div className="navbar-logo">
           <Link to="/">
             <img src={logo} alt="InstaTax.ai" className="navbar-logo-img" />
-            {/* <span>InstaTax.ai</span> */}
           </Link>
         </div>
+
+        {/* ADD THIS HAMBURGER MENU BUTTON */}
+        <div className="mobile-menu-toggle" onClick={toggleMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
         <div className="navbar-menu">
           <Link to="/" className={location.pathname === "/" ? "active" : ""}>
             Home
@@ -294,21 +313,18 @@ const Navbar = () => {
           </Link>
         </div>
 
+        {/* User Authentication */}
         <div className="navbar-user">
-          <div
-            className={`menu-icon ${menuOpen ? "active" : ""}`}
-            onClick={toggleMenu}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <button
-            className={`user-btn ${buttonClicked ? "header-color" : ""}`}
-            onClick={openPopup}
-          >
-            Login / Sign Up <span className="user-icon"></span>
-          </button>
+          {isAuthenticated ? (
+            <div className="user-info">
+              <span>Welcome, {user?.name}</span>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          ) : (
+            <button className="user-btn" onClick={() => setPopupOpen(true)}>
+              Login / Sign Up
+            </button>
+          )}
         </div>
       </div>
 
@@ -321,35 +337,44 @@ const Navbar = () => {
         >
           Home
         </Link>
-       {/* Services in mobile menu */}
-<div className="mobile-dropdown" ref={mobileDropdownRef}>
-  <div className="mobile-dropdown-title" onClick={toggleMobileServicesDropdown}>
-    Services <span className={`dropdown-arrow ${mobileServicesDropdownOpen ? "open" : ""}`}>▼</span>
-  </div>
-  {mobileServicesDropdownOpen && (
-    <div className="mobile-dropdown-content">
-      {loading ? (
-        <p>Loading categories...</p>
-      ) : error ? (
-        <p className="error">{error}</p>
-      ) : (
-        categories.map((category) => (
-          <Link
-            key={category.id}
-            to={`/services/${category.slug || category.documentId}`}
-            onClick={() => {
-              setMenuOpen(false);
-              setMobileServicesDropdownOpen(false);
-            }}
+        {/* Services in mobile menu */}
+        <div className="mobile-dropdown" ref={mobileDropdownRef}>
+          <div
+            className="mobile-dropdown-title"
+            onClick={toggleMobileServicesDropdown}
           >
-            {category.name}
-          </Link>
-        ))
-      )}
-    </div>
-  )}
-</div>
-
+            Services{" "}
+            <span
+              className={`dropdown-arrow ${
+                mobileServicesDropdownOpen ? "open" : ""
+              }`}
+            >
+              ▼
+            </span>
+          </div>
+          {mobileServicesDropdownOpen && (
+            <div className="mobile-dropdown-content">
+              {loading ? (
+                <p>Loading categories...</p>
+              ) : error ? (
+                <p className="error">{error}</p>
+              ) : (
+                categories.map((category) => (
+                  <Link
+                    key={category.id}
+                    to={`/services/${category.slug || category.documentId}`}
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setMobileServicesDropdownOpen(false);
+                    }}
+                  >
+                    {category.name}
+                  </Link>
+                ))
+              )}
+            </div>
+          )}
+        </div>
 
         <Link
           to="/blogs"
@@ -375,6 +400,7 @@ const Navbar = () => {
         </Link>
       </div>
 
+      {/* Keep only one AuthPopup component */}
       <AuthPopup
         isOpen={popupOpen}
         onClose={closePopup}
