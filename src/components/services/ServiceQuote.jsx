@@ -1,139 +1,126 @@
-// // src/pages/services/ServiceQuote.jsx
-// import React, { useState } from "react";
-// import "./ServiceQuote.css";
-// import rocketIllustration from "../../assets/pvtltdcompany1.png";
-// import ChatWidget from "../ChatWidget";
-
-// const ServiceQuote = () => {
-//   const [formData, setFormData] = useState({
-//     prefix: "",
-//     fullName: "",
-//     email: "",
-//     mobile: "",
-//     whatsappUpdates: true,
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({
-//       ...formData,
-//       [name]: value,
-//     });
-//   };
-
-//   const handleToggle = () => {
-//     setFormData({
-//       ...formData,
-//       whatsappUpdates: !formData.whatsappUpdates,
-//     });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log("Quote request submitted:", formData);
-//     // Here you would typically send this data to your backend
-//     alert("Quote request submitted successfully!");
-//   };
-
-//   return (
-//     <div className="service-detail-page">
-//       <div className="service-detail-container">
-//         <div className="quote-form-container">
-//           <div className="quote-form">
-//             <h2>Get Quote Instantly in a Minute!</h2>
-
-//             <form onSubmit={handleSubmit} style={{ gap: "0x" }}>
-//               <div className="form-row">
-//                 <div className="form-group prefix-group">
-//                   <input
-//                     type="text"
-//                     placeholder="Prefix"
-//                     name="prefix"
-//                     value={formData.prefix}
-//                     onChange={handleChange}
-//                   />
-//                 </div>
-
-//                 <div className="form-group fullname-group">
-//                   <input
-//                     type="text"
-//                     placeholder="Full Name"
-//                     name="fullName"
-//                     value={formData.fullName}
-//                     onChange={handleChange}
-//                     required
-//                   />
-//                 </div>
-//               </div>
-
-//               <div className="form-group">
-//                 <input
-//                   type="email"
-//                   placeholder="Email ID"
-//                   name="email"
-//                   value={formData.email}
-//                   onChange={handleChange}
-//                   required
-//                 />
-//               </div>
-
-//               <div className="form-group">
-//                 <input
-//                   type="tel"
-//                   placeholder="Mobile Number"
-//                   name="mobile"
-//                   value={formData.mobile}
-//                   onChange={handleChange}
-//                   required
-//                 />
-//               </div>
-
-//               <div className="toggle-group">
-//                 <div
-//                   className={`toggle-switch ${
-//                     formData.whatsappUpdates ? "active" : ""
-//                   }`}
-//                   onClick={handleToggle}
-//                 >
-//                   <div className="toggle-button"></div>
-//                 </div>
-//                 <label>Get updates through Whatsapp</label>
-//               </div>
-
-//               <button type="submit" className="quote-button">
-//                 Get Quote Now
-//               </button>
-//             </form>
-//           </div>
-//         </div>
-
-//         <div className="service-detail-content">
-//           <div className="service-detail-info">
-//             <h1>Private Limited Company</h1>
-//             <p className="service-subtitle">Start your Pvt. Ltd. in 15 days</p>
-//             <p className="service-price">Rs. 6299</p>
-//           </div>
-
-//           <div className="service-detail-illustration">
-//             <img src={rocketIllustration} alt="Private Limited Company" />
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ServiceQuote;
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ServiceQuote.css";
-// import rocketIllustration from "../../assets/rocketIllustration.png"; // Update path if needed
+import statesCitiesData from "../../../city.json";
+const ServiceQuote = ({ serviceData }) => {
+  const [formData, setFormData] = useState({
+    prefix: "",
+    fullName: "",
+    email: "",
+    phone: "",
+    state: "",
+    city: "",
+    service: serviceData?.documentId || "", // Pre-select the service from prop
+    whatsappUpdates: false,
+  });
 
-const ServiceQuote = () => {
-    const [whatsappUpdates, setWhatsappUpdates] = useState(true);
-const handleToggle = () => {
-  setWhatsappUpdates(!whatsappUpdates);
-};
+  // States for API data and UI control
+  const [cities, setCities] = useState([]);
+  const [states, setStates] = useState([]);
+  const [message, setMessage] = useState({ text: "", type: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Load states from JSON file on component mount
+  useEffect(() => {
+    // Extract state names from the JSON
+    setStates(Object.keys(statesCitiesData));
+  }, []);
+
+  // Update cities when state changes
+  useEffect(() => {
+    if (formData.state) {
+      setCities(statesCitiesData[formData.state] || []);
+      setFormData((prev) => ({ ...prev, city: "" })); // Reset city when state changes
+    } else {
+      setCities([]);
+    }
+  }, [formData.state]);
+
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setMessage({ text: "", type: "" });
+
+    try {
+      const baseUrl = "https://backend.instatax.ai";
+
+      // Log the service ID being used
+      console.log("Selected service ID:", formData.service);
+
+      // Format data according to Strapi's expected structure
+      const submitData = {
+        data: {
+          name: `${formData.prefix} ${formData.fullName}`.trim(),
+          email: formData.email,
+          phone: formData.phone,
+          state: formData.state,
+          city: formData.city,
+          // Strapi v4 connect format
+          service: {
+            connect: [formData.service],
+          },
+        },
+      };
+
+      console.log("Submitting data:", submitData);
+
+      const response = await fetch(`${baseUrl}/api/web-enquiries`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submitData),
+      });
+
+      console.log("Response status:", response.status);
+      const responseData = await response.json();
+      console.log("Response data:", responseData);
+
+      if (response.ok) {
+        // Success handling
+        setMessage({
+          text: "Your quote request has been submitted successfully! Our Team Will reach Out to you Shortly!",
+          type: "success",
+        });
+        // Reset form
+        setFormData({
+          prefix: "",
+          fullName: "",
+          email: "",
+          phone: "",
+          state: "",
+          city: "",
+          service: serviceData?.documentId || "", // Keep the service selected
+          whatsappUpdates: false,
+        });
+      } else {
+        setMessage({
+          text: `Error: ${
+            responseData.error?.message || "Something went wrong"
+          }`,
+          type: "error",
+        });
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setMessage({
+        text: "An unexpected error occurred. Please try again.",
+        type: "error",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="service-quote-container">
       {/* Background Illustration */}
@@ -143,39 +130,133 @@ const handleToggle = () => {
       <div className="service-content">
         {/* Text Section */}
         <div className="service-info">
-          <h1>Private Limited Company</h1>
-          <p>Start your Pvt. Ltd. in 15 days</p>
-          <p>Rs. 6299</p>
+          <h1>{serviceData?.name || "Private Limited Company"}</h1>
+          <p>{serviceData?.short_description || ""}</p>
+          <div className="price-section">
+            {serviceData?.full_price && serviceData?.discounted_price && (
+              <p style={{ display: "flex", gap: "5px" }}>
+                <p style={{ color: "gray" }}>
+                  ₹ <del>{serviceData.full_price}</del>{" "}
+                </p>{" "}
+                <p>₹{serviceData.discounted_price}</p>
+              </p>
+            )}
+          </div>
         </div>
 
         {/* Quote Form */}
         <div className="quote-form-container">
-          <div className="quote-form">
+          <div
+            className="quote-form"
+            style={{ background: "rgb(179 177 177 / 14%)" }}
+          >
             <h2>Get Quote Instantly in a Minute!</h2>
-            
-            <div className="form-group">
-              <input type="text" placeholder="Full Name" />
-            </div>
-            <div className="form-group">
-              <input type="email" placeholder="E-mail ID" />
-            </div>
-            <div className="form-group">
-              <input type="text" placeholder="Mobile Number" />
-            </div>
-            <div className="form-group">
-              <input type="text" placeholder="City" />
-            </div>
-            {/* Fixed Toggle Group */}
-            <div className="toggle-group">
-              <div
-                className={`toggle-switch ${whatsappUpdates ? "active" : ""}`}
-                onClick={handleToggle}
-              >
-                <div className="toggle-button"></div>
+
+            {message.text && (
+              <div className={`form-message ${message.type}`}>
+                {message.text}
               </div>
-              <label>Get updates through WhatsApp</label>
-            </div>
-            <button className="quote-button">Get Quote Now</button>
+            )}
+
+            <form onSubmit={handleSubmit} className="form-inner-padding">
+              <div className="form-row">
+                <select
+                  name="prefix"
+                  value={formData.prefix}
+                  onChange={handleChange}
+                  className="prefix-input"
+                  required
+                >
+                  <option value="" disabled>
+                    Mr
+                  </option>
+                  <option value="Mr">Mr</option>
+                  <option value="Ms">Ms</option>
+                  <option value="Mrs">Mrs</option>
+                </select>
+                <input
+                  type="text"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  placeholder="Full Name"
+                  className="fullname-input"
+                  required
+                />
+              </div>
+
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="E-mail ID"
+                required
+              />
+
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Mobile Number"
+                required
+              />
+
+              <select
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>
+                  Select State
+                </option>
+                {states.map((state) => (
+                  <option key={state} value={state}>
+                    {state}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                required
+                disabled={!formData.state}
+              >
+                <option value="" disabled>
+                  Select City
+                </option>
+                {cities.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
+
+              {/* Service is pre-selected and read-only */}
+              <select
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+                required
+                disabled
+              >
+                <option value={serviceData?.documentId || ""}>
+                  {serviceData?.name || "Selected Service"}
+                </option>
+              </select>
+
+              <button
+                type="submit"
+                className="quote-btn"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Submitting..." : "Get Quote Now"}
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -184,4 +265,3 @@ const handleToggle = () => {
 };
 
 export default ServiceQuote;
-

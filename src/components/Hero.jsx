@@ -1,7 +1,6 @@
 // src/components/Hero.jsx
 import React, { useState, useEffect } from "react";
 import "./Hero.css";
-import heroImage from "../assets/heroimage11.png";
 import statesCitiesData from "../../city.json"; // Adjust the path to your JSON file
 
 const Hero = () => {
@@ -76,117 +75,94 @@ const Hero = () => {
   };
 
   // Handle form submission
-  // Try this modified handleSubmit function
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsSubmitting(true);
-  setMessage({ text: "", type: "" });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setMessage({ text: "", type: "" });
 
-  try {
-    const baseUrl = "https://backend.instatax.ai";
+    try {
+      const baseUrl = "https://backend.instatax.ai";
 
-    // Log the service ID being used
-    console.log("Selected service ID:", formData.service);
+      // Log the service ID being used
+      console.log("Selected service ID:", formData.service);
 
-    // Format data according to Strapi's expected structure
-    // Try a different relationship format
-    // Another possible format for Strapi v4
-    // Another possible format for Strapi v4
-    const submitData = {
-      data: {
-        name: `${formData.prefix} ${formData.fullName}`.trim(),
-        email: formData.email,
-        phone: formData.phone,
-        state: formData.state,
-        city: formData.city,
-        // Strapi v4 connect format
-        service: {
-          connect: [parseInt(formData.service)],
+      // Format data according to Strapi's expected structure
+      const submitData = {
+        data: {
+          name: `${formData.prefix} ${formData.fullName}`.trim(),
+          email: formData.email,
+          phone: formData.phone,
+          state: formData.state,
+          city: formData.city,
+          // Strapi v4 connect format
+          service: {
+            connect: [formData.service],
+          },
         },
-      },
-    };
+      };
 
-    console.log("Submitting data:", submitData);
+      console.log("Submitting data:", submitData);
 
-    const response = await fetch(`${baseUrl}/api/web-enquiries`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(submitData),
-    });
-
-    console.log("Response status:", response.status);
-    const responseData = await response.json();
-    console.log("Response data:", responseData);
-
-    if (response.ok) {
-      // Success handling
-      setMessage({
-        text: "Your quote request has been submitted successfully!",
-        type: "success",
+      const response = await fetch(`${baseUrl}/api/web-enquiries`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submitData),
       });
-      // Reset form
-      setFormData({
-        prefix: "",
-        fullName: "",
-        email: "",
-        phone: "",
-        state: "",
-        city: "",
-        service: "",
-        whatsappUpdates: false,
-      });
-    } else {
+
+      console.log("Response status:", response.status);
+      const responseData = await response.json();
+      console.log("Response data:", responseData);
+
+      if (response.ok) {
+        // Success handling
+        setMessage({
+          text: "Your quote request has been submitted successfully! Our Team Will reach Out to you Shortly!",
+          type: "success",
+        });
+        // Reset form
+        setFormData({
+          prefix: "",
+          fullName: "",
+          email: "",
+          phone: "",
+          state: "",
+          city: "",
+          service: "",
+          whatsappUpdates: false,
+        });
+      } else {
+        setMessage({
+          text: `Error: ${
+            responseData.error?.message || "Something went wrong"
+          }`,
+          type: "error",
+        });
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
       setMessage({
-        text: `Error: ${responseData.error?.message || "Something went wrong"}`,
+        text: "An unexpected error occurred. Please try again.",
         type: "error",
       });
+    } finally {
+      setIsSubmitting(false);
     }
-  } catch (error) {
-    console.error("Submission error:", error);
-    setMessage({
-      text: "An unexpected error occurred. Please try again.",
-      type: "error",
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+  };
+
   return (
     <section className="hero">
       <div className="hero-container">
-        <div className="hero-content">
-          <h1 className="hero-title">
-            Your Trusted Partner <br />
-            for Startup Legalities.
-          </h1>
-          <p className="hero-subtext">Write your subtext here.</p>
-
-          <div className="hero-points">
-            <p>Write your subpoints here.</p>
-            <p>Write your subpoints here.</p>
-            <p>Write your subpoints here.</p>
-            <p>Write your subpoints here.</p>
-            <p>Write your subpoints here.</p>
-          </div>
-        </div>
-
-        <div className="hero-image">
-          <img src={heroImage} alt="Tax illustration" />
-        </div>
-
-        <div
-          className="quote-form"
-          style={{ backgroundColor: "#EDEFF2", borderRadius: "35px" }}
-        >
+        <div className="quote-form">
           <h2>Get Quote Instantly in a Minute!</h2>
 
           {message.text && (
             <div className={`form-message ${message.type}`}>{message.text}</div>
           )}
 
-          <form onSubmit={handleSubmit}>
+          {/* <form onSubmit={handleSubmit}> */}
+          <form onSubmit={handleSubmit} className="form-inner-padding">
             <div className="form-row">
               <select
                 name="prefix"
@@ -196,7 +172,7 @@ const handleSubmit = async (e) => {
                 required
               >
                 <option value="" disabled>
-                  Prefix
+                  Mr
                 </option>
                 <option value="Mr">Mr</option>
                 <option value="Ms">Ms</option>
@@ -274,24 +250,11 @@ const handleSubmit = async (e) => {
                 Select Service
               </option>
               {services.map((category) => (
-                <option key={category.id} value={category.id}>
+                <option key={category.documentId} value={category.documentId}>
                   {category.attributes?.name || category.name}
                 </option>
               ))}
             </select>
-
-            <div className="form-toggle">
-              <label className="toggle">
-                <input
-                  type="checkbox"
-                  name="whatsappUpdates"
-                  checked={formData.whatsappUpdates}
-                  onChange={handleChange}
-                />
-                <span className="slider round"></span>
-              </label>
-              <span>Get updates through Whatsapp</span>
-            </div>
 
             <button type="submit" className="quote-btn" disabled={isSubmitting}>
               {isSubmitting ? "Submitting..." : "Get Quote Now"}

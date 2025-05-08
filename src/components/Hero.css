@@ -1,23 +1,66 @@
 /* src/components/Hero.css */
-.hero {
-  background-color: #673EE4;
+/* .hero {
+  background-color: #673ee4;
   color: white;
-  padding: 35px 0;
-  position: relative;
+  padding: 0;
   overflow: hidden;
-}
-
-.hero-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 18px;
-  padding: 0 20px;
+  background-image: url("../assets/heroimage110.png"); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+} */
+.hero {
+  background-color: #673ee4;
+  color: white;
+  padding: 0;
+  overflow: hidden;
+  background-image: url("../assets/heroimage110.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /* flex-direction: row; */
 }
-
-
+/* Semi-transparent overlay for better readability */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+/* .hero-container {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  width: 28%;
+  padding: 40px 20px;
+  position: relative;
+  z-index: 2;
+} */
+.hero-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 40%;
+  /* max-width: 500px; */
+  padding: 40px;
+  position: relative;
+  z-index: 2;
+  margin-right: 1%;
+}
 .hero-content {
   display: flex;
   flex-direction: column;
@@ -26,10 +69,12 @@
   color: white;
   margin-left: 5px;
 }
+
 .hero-title {
   font-size: 2rem;
   font-weight: bold;
   line-height: 1.2; /* Keep lines close */
+  margin-bottom: 30px;
 }
 .hero-subtext {
   font-size: 1rem;
@@ -40,13 +85,12 @@
   margin-left: 10px; /* Slightly more left than the title */
   line-height: 2;
 }
+
 .hero-points p {
   margin: 3px 0;
 }
- */
-
-.hero-image {
-  grid-column: span 1;
+*/ .hero-image {
+  /* grid-column: span 1; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,47 +101,67 @@
   max-width: 380px;
 }
 
+/* .quote-form {
+  background-color: #673ee4;
+  padding: 1.5rem 1rem;
+ border-radius: 30px !important;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  overflow: hidden; 
+  border: 2px solid white; 
+} */
 .quote-form {
-  grid-column: span 1;
-  background-color:#EDEFF2;
-  padding: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  color: #333;
+  background-color: #673ee4;
+  padding: 1.5rem 1.5rem;
+  border-radius: 30px !important;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  border: 2px solid white;
+}
+.form-inner-padding {
+  padding: 0 10px;
+}
+.quote-form form input,
+.quote-form form select {
+  border-radius: 20px;
+  border: none;
+  padding: 10px 25px;
+  font-size: 0.9rem;
+  width: 100%;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.397);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .quote-form h2 {
-  font-size: 18px;
+ font-size: 18px;
   font-weight: 600;
   margin-top: 20px;
-  margin-bottom:10px;
+  margin-bottom: 20px;
   text-align: center;
-  color: #333;
+  color: white;
 }
 
 .quote-form form {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 10px 8px;
+  gap: 8px;
+  
 }
 
-.quote-form input {
-  padding: 18px 25px;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  font-size: 12px;
-  outline: none;
-  transition: border-color 0.3s;
-  margin: 5px 0;
-}
 
 .quote-form input:focus {
   border-color: #6c46d6;
+  outline: none;
 }
 
 .form-row {
   display: flex;
-  gap: 5px;
+ gap: 10px;
+  
 }
 
 .prefix-input {
@@ -106,15 +170,16 @@
 
 .fullname-input {
   width: 70%;
-
 }
 
 .form-toggle {
   display: flex;
   align-items: center;
+    align-items: center;
   gap: 10px;
   margin-top: 5px;
   font-size: 14px;
+   color: white;
 }
 
 /* Toggle switch */
@@ -162,7 +227,7 @@ input:checked + .slider:before {
 }
 
 .slider.round {
-  border-radius: 20px;
+   border-radius: 50%;
 }
 
 .slider.round:before {
@@ -170,25 +235,29 @@ input:checked + .slider:before {
 }
 
 .quote-btn {
-  background-color: #6c46d6;
+  background-color: #673EE4;
   color: white;
-  padding: 12px;
-  border-radius: 6px;
+  padding: 16px 0;
+  border-radius: 20px;
+  border: none;
   font-weight: 500;
   font-size: 15px;
+  cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 8px;
-  margin-bottom: 15px;
+  margin-top: 10px;
+  margin-bottom: 16px;
+  width: 100%;
 }
 
 .quote-btn:hover {
   background-color: #5b3cb9;
 }
+
 /* Style for select elements (dropdowns) */
 .quote-form select {
   padding: 18px 25px;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
+  /* border: 1px solid #e0e0e0; */
+  border-radius: 25px;
   font-size: 12px;
   outline: none;
   transition: border-color 0.3s;
@@ -216,6 +285,7 @@ input:checked + .slider:before {
   border-radius: 4px;
   font-size: 14px;
   text-align: center;
+  color: white;
 }
 
 .form-message.success {
@@ -229,116 +299,97 @@ input:checked + .slider:before {
   color: #721c24;
   border: 1px solid #f5c6cb;
 }
-@media (min-width: 1024px) {
-  .hero-image {
-    margin-top: 90px; /* Adjust this value as needed */
+
+/* ===== MEDIA QUERIES FOR THE THREE KEY SCREEN SIZES ===== */
+
+/* 1. Mac/Large Desktop Screens */
+@media (min-width: 1440px) {
+  .hero {
+    background-position: 30% center; /* Adjusted position for large screens */
+    background-size: cover;
   }
-}
-@media (max-width: 992px) {
+  
   .hero-container {
-    grid-template-columns: 1fr 1fr;
+    width: 35%;
+    max-width: 500px;
+    margin-right: 1%;
+    padding: 40px;
   }
-  .hero-image {
-    margin-top: 60px; /* Reduced from 90px */
-  }
-
-  .hero-content {
-    grid-column: span 2;
-  }
-
-  .hero-image {
-    grid-column: span 1;
-  }
-
+  
   .quote-form {
-    grid-column: span 1;
+    max-width: 450px;
+    padding: 2rem 1.5rem;
   }
 }
 
+/* 2. Default Laptop Screens */
+@media (min-width: 768px) and (max-width: 1439px) {
+  .hero {
+    background-position: 35% center;
+  }
+  
+  .hero-container {
+    width: 45%;
+    margin-right: 0.5%;
+    padding: 30px;
+  }
+  
+  .quote-form {
+    max-width: 380px;
+  }
+}
+
+/* 3. Mobile Screens */
 @media (max-width: 767px) {
-  .hero-container {
-    display: flex;
+  .hero {
     flex-direction: column;
-    align-items: center;
-    grid-template-columns: 1fr;
-    text-align: center; /* Center everything */
-  }
-
-  .hero-content {
-    align-items: center;
-    margin: 0 auto;
-    padding: 10px;
-  }
-
-  .hero-title {
-    font-size: 1.8rem;
-    line-height: 1.3;
-  }
-
-  .hero-subtext {
-    font-size: 1rem;
-  }
-
-  .hero-points {
-    text-align: left;
-    font-size: 0.95rem;
-    line-height: 1.8;
-    margin-left: 0;
-  }
-
-  /* Center hero image */
-  .hero-image {
-    
-    display: flex;
+    min-height: auto;
+    padding: 30px 0;
+    background-position: center;
     justify-content: center;
+    align-items: center;
   }
-
-  .hero-image img {
-    max-width: 300px; /* Reduce image size for small screens */
+  
+  .hero::before {
+    background-color: rgba(0, 0, 0, 0.5); /* Darker overlay for mobile */
   }
-
-  /* Quote Form Adjustments */
-  .quote-form {
+  
+  .hero-container {
     width: 90%;
-    margin: 20px auto;
-    padding: 15px;
-    border-radius: 20px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    padding: 20px 10px;
+    margin-right: 0;
+    justify-content: center;
+    align-items: center;
   }
-
+  
+  .quote-form {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 350px;
+    margin: 20px auto;
+    padding: 1.2rem 1rem;
+  }
+  
   .quote-form h2 {
     font-size: 16px;
   }
-
-  .quote-form form {
-    padding: 15px;
-  }
-
-  .quote-form input {
-    padding: 12px;
+  
+  .quote-form form input,
+  .quote-form form select {
+    padding: 12px 15px;
     font-size: 14px;
+    height: 38px;
   }
-
+  
   .form-row {
-    flex-direction: column;
-    gap: 5px;
+    gap: 8px;
   }
-
-  .prefix-input,
-  .fullname-input {
-    width: 100%;
-  }
-
+  
   .quote-btn {
-    width: 100%;
+    padding: 12px 0;
     font-size: 14px;
-    padding: 12px;
-  }
-  @media (max-width: 767px) {
-  .quote-form select {
-    padding: 12px;
-    font-size: 14px;
+    margin-top: 10px;
   }
 }
-}
-

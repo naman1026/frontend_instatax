@@ -30,7 +30,7 @@ const Navbar = () => {
     }
   }, []);
 
-  // Toggle mobile menu - UNCOMMENTED THIS FUNCTION
+  // Toggle mobile menu
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
     // Reset mobile dropdown when menu is closed
@@ -48,7 +48,13 @@ const Navbar = () => {
     navigate("/"); // Redirect to home
   };
 
-  // Fetch categories from API - USING YOUR ORIGINAL API FETCHING CODE
+  // Function to handle blog navigation
+  const handleBlogClick = (e) => {
+    e.preventDefault();
+    window.location.href = "https://blogs.instatax.ai/";
+  };
+
+  // Fetch categories from API
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -243,7 +249,6 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* ADD THIS HAMBURGER MENU BUTTON */}
         <div className="mobile-menu-toggle" onClick={toggleMenu}>
           <span></span>
           <span></span>
@@ -292,12 +297,15 @@ const Navbar = () => {
               </div>
             )}
           </div>
-          <Link
-            to="/blogs"
+
+          {/* Changed from target="_blank" to regular link */}
+          <a
+            href="https://blogs.instatax.ai/"
+            onClick={handleBlogClick}
             className={location.pathname === "/blogs" ? "active" : ""}
           >
             Blog
-          </Link>
+          </a>
 
           <Link
             to="/about-us"
@@ -376,13 +384,18 @@ const Navbar = () => {
           )}
         </div>
 
-        <Link
-          to="/blogs"
+        {/* Changed to use <a> with onClick handler in mobile menu too */}
+        <a
+          href="https://blogs.instatax.ai/"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = "https://blogs.instatax.ai/";
+            setMenuOpen(false);
+          }}
           className={location.pathname === "/blogs" ? "active" : ""}
-          onClick={() => setMenuOpen(false)}
         >
-          Blogs
-        </Link>
+          Blog
+        </a>
 
         <Link
           to="/about-us"

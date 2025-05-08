@@ -1,6 +1,6 @@
 /* Overall Services Section */
 .services {
-  padding: 60px ;
+  padding: 60px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -47,12 +47,12 @@
 .services-header h2 {
   font-size: 2.5rem;
   font-weight: 900;
-  color:black;
+  color: black;
 }
 .services-text p {
   font-size: 1rem;
   line-height: 1.6;
-  color:black;
+  color: black;
   margin-bottom: 25px;
 }
 /* Services Content (Text + Image) */
@@ -101,14 +101,19 @@
   font-size: 18px;
 }
 
-/* Icon Backgrounds */
-.business-icon { background-color: #ffe9bf; }
-.tax-icon { background-color: #ffd5d5; }
-.accounting-icon { background-color: #d6f3ff; }
-.legal-icon { background-color: #fff1d6; }
-.trademark-icon { background-color: #ffe1e1; }
-.license-icon { background-color: #e1fffa; }
-.other-icon { background-color: #e9e9ff; }
+/* Icon Backgrounds - Customized for API data */
+.start_business-icon { background-color: #ffe9bf; }
+.category-icon { background-color: #ffd5d5; }
+.manage_business-icon { background-color: #d6f3ff; }
+.grow_business-icon { background-color: #fff1d6; }
+.certificate-licenses-icon { background-color: #e1fffa; }
+
+/* Default background for any other categories */
+.category-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
 
 /* Right Section: Image */
 .services-image {
@@ -119,10 +124,10 @@
 }
 
 .services-image img {
-  max-width: 100%;
+  max-width: 90%;
   object-fit: contain;
   height: auto;
-  max-width: 600px;
+  max-width: 500px;
   margin-bottom: 5px;
 }
 
@@ -155,6 +160,13 @@
   transform: translateY(-3px);
 }
 
+/* Loading and Error States */
+.service-categories p {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 20px;
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
   .services-content {
@@ -167,13 +179,12 @@
     max-width: 100%;
     text-align: center;
   }
- .service-categories {
+  .service-categories {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
   .services-image {
     justify-content: center;
     max-width: 100%;
-
   }
   .services-image img {
     max-width: 750px; /* Adjust for tablets */
@@ -206,8 +217,7 @@
     padding: 10px 16px;
   }
   .services-image img {
-    max-width:340px; /* Adjust for small mobile */
+    max-width: 340px; /* Adjust for small mobile */
     margin-bottom: 5px;
   }
-
 }

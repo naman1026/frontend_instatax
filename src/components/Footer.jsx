@@ -81,7 +81,7 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/blogs" className="footer-link">
+                  <Link to="https://blogs.instatax.ai/" className="footer-link">
                     Blogs
                   </Link>
                 </li>

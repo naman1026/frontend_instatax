@@ -103,10 +103,11 @@
 
 .services-illustration img {
   width: 100%;
-  max-width: 400px; /* Ensures image doesn't get too big */
+  max-width: 600px; /* Ensures image doesn't get too big */
   height: auto;
   transform: scale(1); /* Resets excessive scaling */
   object-fit: contain; /* Prevents image distortion */
+  margin-bottom: 10%;
 }
 
 /* 🔹 Tablet View (992px and below) */

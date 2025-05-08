@@ -1,5 +1,4 @@
-// src/pages/services/ServiceDetail.jsx
-// This is a template/base component that can be extended for each service type
+
 import React, { useState } from "react";
 import "./ServiceDetail.css";
 

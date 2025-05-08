@@ -4,18 +4,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px 20px;
+  padding: 30px 20px;
   width: 100%; /* Full width container */
   margin: 0; /* Remove margin to eliminate gaps */
 }
 
 .faqs-content {
   width: 100%;
-  max-width: 1200px; /* Match the width with BenefitsSection */
-  background-color: transparent; /* Changed from white to transparent */
-  padding: 20px 0;
+  max-width: 1200px; /* Reduced max-width from 1200px to 900px */
+  background-color: transparent;
+  padding: 15px 0; /* Reduced padding from 20px to 15px */
 }
-
 .faqs-title {
   font-size: 24px;
   font-weight: 700;
@@ -28,7 +27,7 @@
 .faqs-list {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Increased from 10px to match Benefits */
+  gap: 13px; /* Increased from 10px to match Benefits */
 }
 
 .faq-item {
@@ -51,7 +50,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 20px;
+  padding: 2px 10px;
   width: 100%;
 }
 
@@ -83,7 +82,7 @@
 }
 
 .faq-answer {
-  padding: 0 20px 15px 20px;
+  padding: 0 10px 8px 10px;
   color: #666;
   font-size: 14px;
   line-height: 1.5;

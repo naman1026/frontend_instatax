@@ -122,7 +122,7 @@
   color: #6c46d6;
 }
 .dropdown-content a:first-child {
-  border-bottom: 1px solid #f0f0f0;
+  /* border-bottom: 1px solid #f0f0f0; */
   font-weight: 500;
 }
 
