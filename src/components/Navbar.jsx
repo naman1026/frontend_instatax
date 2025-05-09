@@ -330,7 +330,7 @@ const Navbar = () => {
             </div>
           ) : (
             <button className="user-btn" onClick={() => setPopupOpen(true)}>
-              Login / Sign Up
+              Login
             </button>
           )}
         </div>
